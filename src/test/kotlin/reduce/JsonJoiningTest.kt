@@ -24,7 +24,7 @@ class JsonJoiningTest {
                 "d" : 10,
                 "e" : [1,2,3,4]
            }
-            """.trimIndent().noWs()
+            """
         ).transform(
             TransformerFactory.joining()
         )

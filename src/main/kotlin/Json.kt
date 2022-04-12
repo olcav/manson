@@ -6,7 +6,7 @@ import transform.transformers.reduce.ReduceTransformer
 
 open class Json(vararg jsons: String) {
 
-    protected var jsonsData: MutableList<JsonData> = jsons.map {
+    private var jsonsData: MutableList<JsonData> = jsons.map {
         JsonData(it)
     }.toMutableList()
 
@@ -18,30 +18,6 @@ open class Json(vararg jsons: String) {
         return jsonsData.map {
             it.getString()
         }
-    }
-
-    /*
-    fun getFieldValuesWithJsonPath(jsonPaths: List<String>): JsonPathFieldValues {
-        return JsonPathFieldValues(jsons, jsons.flatMap { json ->
-            val ctx = JsonPath.parse(json)
-            jsonPaths.flatMap {
-                when (val values = ctx.read<Any>(it)) {
-                    is List<*> -> {
-                        values.map { it.toString() }
-                    }
-                    is String -> {
-                        listOf(values)
-                    }
-                    else -> {
-                        listOf()
-                    }
-                }
-            }.toList()
-        })
-    }*/
-
-    open fun getTotalSize(): Int {
-        return jsonsData.sumOf { it.size() }
     }
 
     fun extract(vararg extractor: Extractor): Json {
@@ -65,7 +41,7 @@ open class Json(vararg jsons: String) {
     /**
      * Apply group of transformers in parallel then joins all results.
      */
-    fun parallelTransform(vararg transforms: List<Transformer>, joiner: ReduceTransformer? = null): Json {
+    private fun parallelTransform(vararg transforms: List<Transformer>, joiner: ReduceTransformer? = null): Json {
         val jsonToTransforms = (transforms.indices).map {
             val jsonClone = Json(jsonsData.map { it.clone() })
             jsonClone.transform(transforms[it])

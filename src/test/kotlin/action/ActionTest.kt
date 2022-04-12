@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 class ActionTest {
 
     @Test
-    fun should() {
+    fun shouldTestForEachAction() {
         Json(
             """
                     {
@@ -31,11 +31,11 @@ class ActionTest {
         ).transform(
             TransformerFactory.fieldValuesExtraction("a")
         ).execute(
-            ActionFactory.forEach { a, i ->
+            ActionFactory.forEach { jsonData, i ->
                 if (i == 0) {
-                    assertEquals("{\"d\":\"aaa\",\"aa\":{\"b\":[5,6,7]}}", a.getString())
+                    assertEquals("{\"d\":\"aaa\",\"aa\":{\"b\":[5,6,7]}}", jsonData.getString())
                 } else if (i == 1) {
-                    assertEquals("{\"d\":\"1\",\"aa\":{\"b\":[8,6]}}", a.getString())
+                    assertEquals("{\"d\":\"1\",\"aa\":{\"b\":[8,6]}}", jsonData.getString())
                 }
             })
     }

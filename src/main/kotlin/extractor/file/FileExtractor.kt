@@ -4,6 +4,9 @@ import extractor.Extractor
 import transform.JsonData
 import java.io.File
 
+/**
+ * Extract json data from files.
+ */
 class FileExtractor(private val paths: List<String>) : Extractor {
     override fun extract(): List<JsonData> {
         val data = mutableListOf<JsonData>()

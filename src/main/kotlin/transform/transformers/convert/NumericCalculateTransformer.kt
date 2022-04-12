@@ -8,7 +8,7 @@ import transform.Transformer
 class NumericCalculateTransformer(val expression: (Int) -> (Int)) : Transformer() {
     override fun transform(jsonData: List<JsonData>): List<JsonData> {
         return jsonData.map {
-            var visitedFieldName = mutableSetOf<Int>()
+            val visitedFieldName = mutableSetOf<Int>()
             val mainNode = mapper.readTree(it.getString())
             walk(mainNode) { currentNode, parentNode, fieldName, _ ->
                 if (!visitedFieldName.contains(currentNode.hashCode())) {
@@ -19,10 +19,10 @@ class NumericCalculateTransformer(val expression: (Int) -> (Int)) : Transformer(
                                 expression(currentNode.asInt())
                             )
                         } else if (parentNode.isArray) {
-                            var array = parentNode as ArrayNode
-                            var elements = array.elements().asSequence().toMutableList()
+                            val array = parentNode as ArrayNode
+                            val elements = array.elements().asSequence().toMutableList()
                             (0 until elements.size).forEach { i ->
-                                var e = elements[i]
+                                val e = elements[i]
                                 if (e.isInt) {
                                     array.set(i, expression(e.asInt()))
                                 }

@@ -11,7 +11,7 @@ import kotlin.test.assertEquals
 class WriteFileActionTest {
 
     @Test
-    fun should() {
+    fun shouldWriteFiles() {
         Json(
             """
                     {
