@@ -1,7 +1,7 @@
 package reduce
 
 import Json
-import noWs
+import flat
 import org.junit.jupiter.api.Test
 import transform.TransformerFactory
 import transform.transformers.reduce.ArrayMergeStrategy
@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 class JsonMergeTest {
 
     @Test
-    fun shouldReturnFields() {
+    fun shouldMergeJsonAndRemoveDuplicates() {
         val jsonMerge = Json(
             """
             {
@@ -56,7 +56,7 @@ class JsonMergeTest {
                     },
                     "test":1324
                     }
-                    """.noWs()
+                    """.flat()
         assertEquals(
             listOf(
                 expectMergeJson
@@ -92,7 +92,7 @@ class JsonMergeTest {
                         "b" : 25,
                         "d" : { "e" : 30 }
                     }
-                    """.noWs()
+                    """.flat()
         assertEquals(
             expectMergeJson,
             jsonMerge.toString()

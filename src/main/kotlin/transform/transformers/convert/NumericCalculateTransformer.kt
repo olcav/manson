@@ -6,6 +6,8 @@ import transform.JsonData
 import transform.Transformer
 
 class NumericCalculateTransformer(val expression: (Int) -> (Int)) : Transformer() {
+
+    // TODO : fix that, the test show that don't work.
     override fun transform(jsonData: List<JsonData>): List<JsonData> {
         return jsonData.map {
             val visitedFieldName = mutableSetOf<Int>()

@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 class JsonParallelTransformTest {
 
     @Test
-    fun shouldReturnFields() {
+    fun shouldPerformParallelTransformationAndSumNumeric() {
         val jsonMerge = Json(
             """
             {

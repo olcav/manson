@@ -1,6 +1,7 @@
 package extraction
 
 import Json
+import flat
 import org.junit.jupiter.api.Test
 import transform.TransformerFactory
 import kotlin.test.assertEquals
@@ -28,7 +29,7 @@ class JsonObjectTest {
             )
         )
         assertEquals(
-            listOf("""
+            """
                 {
                     "numeric":3, 
                     "b":"c",
@@ -36,9 +37,8 @@ class JsonObjectTest {
                     "array": [1,2,3],
                     "char":"c",
                     "arrayChar": ["dd"]
-                }"""
-            ),
-            jsonObject.getJsons()
+                }""".flat(),
+            jsonObject.getJsons()[0].flat()
         )
     }
 }

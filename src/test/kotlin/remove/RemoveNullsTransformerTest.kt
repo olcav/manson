@@ -1,14 +1,14 @@
 package remove
 
 import Json
-import noWs
+import flat
 import org.junit.jupiter.api.Test
 import transform.TransformerFactory
 import kotlin.test.assertEquals
 
 class RemoveNullsTransformerTest {
     @Test
-    fun shouldConstructJsonObject() {
+    fun shouldRemoveNullsValues() {
         val json = Json(
             """
            {
@@ -35,7 +35,7 @@ class RemoveNullsTransformerTest {
                 },
             "d" : ["dd"]
            }
-        """.noWs()
+        """.flat()
             ),
             jsonObject.getJsons()
         )
